@@ -1,16 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-
 const authRouter = require('./controllers/auth');
-const testJwtRouter = require('./controllers/test-jwt');
+
 
 const app = express();
-const usersRouter = require('./controllers/users');
-
-// below express.json()
-app.use('/users', usersRouter);
-
+const hootsRouter = require("./controllers/hoots.js");
 // Middleware
 app.use(express.json());
 
@@ -22,8 +17,7 @@ mongoose.connection.on('connected', () => {
 
 // Routes
 app.use('/auth', authRouter);
-app.use('/test-jwt', testJwtRouter);
-
+app.use("/hoots", hootsRouter);
 // Server
 app.listen(3000, () => {
   console.log('Server running on port 3000');
